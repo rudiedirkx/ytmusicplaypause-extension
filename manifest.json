@@ -1,0 +1,31 @@
+{
+	"name": "YouTube Music™ play/pause",
+	"description": "Global play/pause button for any open YouTube Music™ tab",
+	"version": "1.0",
+	"manifest_version": 3,
+
+	"permissions": [
+		"tabs"
+	],
+
+	"background": {
+		"service_worker": "ytmusicplaypause.sw.js"
+	},
+	"content_scripts": [ {
+		"all_frames": true,
+		"js": [ "ytmusicplaypause.content.js" ],
+		"matches": [ "*://music.youtube.com/*" ],
+		"run_at": "document_end"
+	} ],
+	"action": {
+		"default_title": "YouTube Music™ play/pause",
+		"default_icon": {
+			"128": "images/icon128.png"
+		}
+	},
+
+	"icons": {
+		"128": "images/icon128.png",
+		"48": "images/icon48.png"
+	}
+}
