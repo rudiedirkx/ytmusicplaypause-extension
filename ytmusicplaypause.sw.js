@@ -5,14 +5,16 @@
 
 async function sendPlayPause() {
 	const tabs = await chrome.tabs.query({
-		// url: /\/\/music.youtube.com\//,
-		url: "*://music.youtube.com/*",
+		url: "*://*.youtube.com/*",
 	});
-	console.log(tabs);
-	if (tabs.length != 1) return;
+	console.log('tabs', tabs);
+	// if (tabs.length != 1) return;
 
-	const response = await chrome.tabs.sendMessage(tabs[0].id, {cmd: "play/pause"});
-	console.log(response);
+	for (const tab of tabs.reverse()) {
+		const response = await chrome.tabs.sendMessage(tab.id, {cmd: "play/pause"});
+		console.log(tab.url, response);
+		if (response === true) break;
+	}
 }
 
 chrome.action.onClicked.addListener(function() {
