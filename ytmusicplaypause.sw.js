@@ -6,6 +6,7 @@
 async function sendPlayPause() {
 	const tabs = await chrome.tabs.query({
 		url: "*://*.youtube.com/*",
+		pinned: true,
 	});
 	console.log('tabs', tabs);
 	// if (tabs.length != 1) return;
